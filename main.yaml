@@ -102,7 +102,7 @@
   - name: Generate ssh-key {{ssh_key_filename}}
     openssh_keypair:
       path: "{{ssh_key_filename}}"
-      type: rsa
+      type: ed25519
       state: present
       force: no
   - name: Set EDITOR Environment variable

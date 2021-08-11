@@ -29,7 +29,7 @@ This installs the following things:
 - nvm
 - Node.JS LTS
 - eslint
-- Generates an ssh key, it will be in ~/.ssh/id_rsa.pub
+- Generates an ssh key, it will be in ~/.ssh/id_ed25519.pub
 - termdown (A pip module that gives you a countdown)
 - Sets VSCODE to be your default editor.
 
