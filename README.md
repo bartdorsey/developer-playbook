@@ -31,6 +31,7 @@ This installs the following things:
 - eslint
 - Generates an ssh key, it will be in ~/.ssh/id_rsa.pub
 - termdown (A pip module that gives you a countdown)
+- Sets VSCODE to be your default editor.
 
 Feel free to fork this and modify it to suit your needs or learn a bit about
 how to fight with ansible.
