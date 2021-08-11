@@ -11,8 +11,7 @@
     sudo apt install ansible
     ```
 4. Clone this repo down or download the zip file.
-5. Change your git user name and email in the variables.yml file
-5. Optionally change the postgres password the variables.yml file
+5. Copy variables-example.yml to variables.yml and edit it to suit your needs
 6. Run the playbook from the directory
 
     ```shell

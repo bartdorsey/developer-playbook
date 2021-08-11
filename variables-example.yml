@@ -1,0 +1,4 @@
+postgres_password: "password"
+ssh_key_filename: "~/.ssh/id_ed25519"
+git_user: 'Change Me'
+git_email: 'change@changeme.com'
