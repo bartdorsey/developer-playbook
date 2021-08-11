@@ -11,6 +11,7 @@
     sudo apt install ansible
     ```
 4. Clone this repo down or download the zip file.
+5. Change your git user name and email in the variables.yml file
 5. Optionally change the postgres password the variables.yml file
 6. Run the playbook from the directory
 
@@ -32,6 +33,7 @@ This installs the following things:
 - Generates an ssh key, it will be in ~/.ssh/id_ed25519.pub
 - termdown (A pip module that gives you a countdown)
 - Sets VSCODE to be your default editor.
+- Configures git username, email and sets `git pull` to do a rebase
 
 Feel free to fork this and modify it to suit your needs or learn a bit about
 how to fight with ansible.
