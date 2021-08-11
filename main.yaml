@@ -1,0 +1,126 @@
+---
+- name: install
+  hosts: 127.0.0.1
+  vars_files:
+    - variables.yml
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  connection: local
+  tasks:
+  - name: apt upgrade
+    become: yes
+    apt:
+      update_cache: yes
+      upgrade: full
+  - name: apt install dependencies
+    become: yes
+    apt:
+      update_cache: yes
+      state: present
+      name: 
+        - zsh
+        - acl
+        - git
+        - postgresql
+        - python3-pip
+  - name: change user shell to zsh
+    become: yes
+    user:
+      name: "{{ the_user }}"
+      shell: /bin/zsh
+  - name: Install starship prompt
+    become: yes
+    shell: sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
+  - name: Add starship to bashrc
+    blockinfile:
+      marker: "### {mark} Initialized Starship Prompt"
+      mode: 0644
+      path: ~/.bashrc
+      create: yes
+      block: eval "$(starship init bash)"
+  - name: Add starship to zshrc
+    blockinfile:
+      marker: "### {mark} Initialized Starship Prompt"
+      mode: 0644
+      path: ~/.zshrc
+      create: yes
+      block: eval "$(starship init zsh)"
+  - name: clone nvm into ~/.nvm
+    git: 
+      repo: https://github.com/nvm-sh/nvm.git
+      dest: ~/.nvm 
+  - name: Add NVM initialization to startup files
+    blockinfile:
+      marker: "### {mark} INTIALIZE NVM"
+      mode: 0644
+      path: "{{ item }}"
+      create: yes
+      block: |
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
+      state: present
+    with_items:
+      - "~/.bashrc"
+      - "~/.zshrc"
+  - name: Install LTS Node and set it as default
+    command: bash -c '. ~/.nvm/nvm.sh; nvm install --lts; nvm alias default lts/\*'
+  - name: install eslint globally
+    command: bash -c '. ~/.nvm/nvm.sh; npm install -g eslint'
+  - name: Start postgresql
+    become: yes
+    become_user: root
+    command: 
+      cmd: service postgresql start
+      warn: false
+  - name: Set Postgres ENV files in ~/.{{ item }}
+    blockinfile:
+      create: yes
+      marker: "### {mark} SET POSTGRES ENVIRONMENT VARIABLES"
+      dest: "{{ item }}"
+      block: |
+        export PGHOST="localhost"
+        export PGUSER="postgres"
+    with_items:
+      - "~/.bashrc"
+      - "~/.zshrc"
+  - name: Set postgres password
+    become: yes
+    become_method: sudo
+    become_user: postgres
+    command: psql -c "ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';"
+  - name: create pgpass file
+    file:
+      path: ~/.pgpass
+      state: touch
+      mode: 0600
+  - name: populate pgpass file
+    lineinfile:
+      path: ~/.pgpass
+      line: "localhost:5432:*:postgres:password"
+      state: present
+  - name: Generate ssh-key {{ssh_key_filename}}
+    openssh_keypair:
+      path: "{{ssh_key_filename}}"
+      type: rsa
+      state: present
+      force: no
+  - name: Set EDITOR Environment variable
+    blockinfile: 
+      marker: "### {mark} SET VSCODE TO BE THE DEFAULT EDITOR"
+      dest: ~/.{{ item }}
+      block: |
+        export EDITOR="code -w"
+    with_items:
+      - bashrc
+      - zshrc
+  - name: Set local path for python
+    blockinfile:
+      marker: "### {mark} SET LOCAL PATH FOR PYTHON"
+      dest: ~/.{{ item }}
+      block: export PATH=$PATH:$HOME/.local/bin
+    with_items:
+      - bashrc
+      - zshrc
+  - name: Install termdown
+    command: pip install termdown
