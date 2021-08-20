@@ -8,6 +8,9 @@
   when: ansible_distribution|lower == 'ubuntu'
 - name: Setup Shell
   import_tasks: shell.yml
+- name: Setup aliases for WSL
+  import_tasks: aliases-wsl.yml
+  when: ansible_facts.env.WSL_DISTRO_NAME|lower == 'ubuntu'
 - name: Setup Python
   import_tasks: python.yml
 - name: Setup SSH Key

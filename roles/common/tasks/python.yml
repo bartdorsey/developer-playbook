@@ -4,7 +4,6 @@
     dest: ~/.{{ item }}
     block: export PATH=$PATH:$HOME/.local/bin
   with_items:
-    - bashrc
     - zshrc
 - name: Install termdown
   command: pip3 install termdown

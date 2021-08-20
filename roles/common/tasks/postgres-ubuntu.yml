@@ -13,7 +13,6 @@
       export PGHOST="localhost"
       export PGUSER="postgres"
   with_items:
-    - "~/.bashrc"
     - "~/.zshrc"
 - name: Set postgres password
   become: yes

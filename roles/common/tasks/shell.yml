@@ -6,13 +6,6 @@
 - name: Install starship prompt
   become: yes
   shell: sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
-- name: Add starship to bashrc
-  blockinfile:
-    marker: "### {mark} Initialized Starship Prompt"
-    mode: 0644
-    path: ~/.bashrc
-    create: yes
-    block: eval "$(starship init bash)"
 - name: Add starship to zshrc
   blockinfile:
     marker: "### {mark} Initialized Starship Prompt"
@@ -27,15 +20,4 @@
     block: |
       export EDITOR="code -w"
   with_items:
-    - bashrc
-    - zshrc
-- name: Setup Common useful aliases
-  blockinfile:
-    marker: "### {mark} Common Useful Shell Aliases"
-    dest: ~/.{{ item }}
-    block: |
-      alias open='explorer.exe'
-      alias wsl='wsl.exe'
-  with_items:
-    - bashrc
     - zshrc

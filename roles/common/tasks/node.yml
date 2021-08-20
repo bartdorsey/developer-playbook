@@ -14,7 +14,6 @@
       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
     state: present
   with_items:
-    - "~/.bashrc"
     - "~/.zshrc"
 - name: Install LTS Node and set it as default
   command: bash -c '. ~/.nvm/nvm.sh; nvm install --lts; nvm alias default lts/\*'

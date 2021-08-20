@@ -1,0 +1,10 @@
+- name: Setup Common useful aliases for WSL
+  blockinfile:
+    marker: "### {mark} Common Useful Shell Aliases"
+    dest: ~/.{{ item }}
+    block: |
+      alias open='explorer.exe'
+      alias wsl='wsl.exe'
+  with_items:
+    - bashrc
+    - zshrc
