@@ -14,3 +14,4 @@
       - git
       - postgresql
       - python3-pip
+      - python-is-python3
