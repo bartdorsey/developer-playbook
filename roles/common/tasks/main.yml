@@ -5,7 +5,7 @@
   debug: msg="{{ ansible_distribution }}"
 - name: Install Dependencies
   import_tasks: apt-upgrade.yml
-  when: ansible_distribution|lower == 'ubuntu'
+  when: ansible_facts.os_family|lower == 'debian'
 - name: Setup Shell
   import_tasks: shell.yml
 - name: Setup aliases for WSL
@@ -22,7 +22,7 @@
   import_tasks: node.yml
 - name: Setup Postgres on Ubuntu
   import_tasks: postgres-ubuntu.yml
-  when: ansible_distribution|lower == 'ubuntu'
+  when: ansible_facts.os_family|lower == 'debian'
 - name: Setup Postgres on macOS
   import_tasks: postgres-macos.yml
   when: ansible_distribution|lower == 'macosx'
