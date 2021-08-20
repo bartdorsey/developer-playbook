@@ -6,5 +6,4 @@
       alias open='explorer.exe'
       alias wsl='wsl.exe'
   with_items:
-    - bashrc
     - zshrc

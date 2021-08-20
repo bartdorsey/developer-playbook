@@ -1,6 +1,6 @@
-- name: Print all available facts
-  ansible.builtin.debug:
-    var: ansible_facts
+# - name: Print all available facts
+#   ansible.builtin.debug:
+#     var: ansible_facts
 - name: Distribution
   debug: msg="{{ ansible_distribution }}"
 - name: Install Dependencies
@@ -10,7 +10,8 @@
   import_tasks: shell.yml
 - name: Setup aliases for WSL
   import_tasks: aliases-wsl.yml
-  when: ansible_facts.env.WSL_DISTRO_NAME|lower == 'ubuntu'
+  when: 
+    - ansible_facts['env']['WSL_DISTRO_NAME'] is defined
 - name: Setup Python
   import_tasks: python.yml
 - name: Setup SSH Key
@@ -22,3 +23,6 @@
 - name: Setup Postgres on Ubuntu
   import_tasks: postgres-ubuntu.yml
   when: ansible_distribution|lower == 'ubuntu'
+- name: Setup Postgres on macOS
+  import_tasks: postgres-macos.yml
+  when: ansible_distribution|lower == 'macosx'

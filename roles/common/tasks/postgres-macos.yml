@@ -1,0 +1,5 @@
+- name: Install postgresql
+  community.general.homebrew:
+    update_homebrew: yes
+    name: postgres
+    state: present
