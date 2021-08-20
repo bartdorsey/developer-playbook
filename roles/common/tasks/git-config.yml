@@ -1,0 +1,6 @@
+- name: Configure GIT username
+  command: git config --global user.name "{{git_user}}"
+- name: Configure GIT email
+  command: git config --global user.email "{{git_email}}"
+- name: Configure GIT Pull to use Rebase
+  command: git config --global pull.rebase true

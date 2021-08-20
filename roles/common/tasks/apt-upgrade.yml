@@ -1,0 +1,16 @@
+- name: apt upgrade
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: full
+- name: apt install dependencies
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name: 
+      - zsh
+      - acl
+      - git
+      - postgresql
+      - python3-pip

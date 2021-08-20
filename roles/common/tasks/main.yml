@@ -1,0 +1,21 @@
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
+- name: Distribution
+  debug: msg="{{ ansible_distribution }}"
+- name: Install Dependencies
+  import_tasks: apt-upgrade.yml
+  when: ansible_distribution|lower == 'ubuntu'
+- name: Setup Shell
+  import_tasks: shell.yml
+- name: Setup Python
+  import_tasks: python.yml
+- name: Setup SSH Key
+  import_tasks: ssh-key.yml
+- name: Configure GIT
+  import_tasks: git-config.yml  
+- name: Setup NodeJS
+  import_tasks: node.yml
+- name: Setup Postgres on Ubuntu
+  import_tasks: postgres-ubuntu.yml
+  when: ansible_distribution|lower == 'ubuntu'

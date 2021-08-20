@@ -1,0 +1,15 @@
+---
+- name: install
+  hosts: 127.0.0.1
+  gather_facts: yes
+  vars_files:
+    - variables.yml
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  connection: local
+  roles:
+    - common
+  tasks:
+    - name: Distribution
+      debug: msg="{{ ansible_distribution }}"
+

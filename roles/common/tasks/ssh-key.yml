@@ -1,0 +1,10 @@
+- name: Create ~/.ssh directory
+  file:
+    path: ~/.ssh
+    state: directory
+- name: Generate ssh-key {{ssh_key_filename}}
+  openssh_keypair:
+    path: "{{ssh_key_filename}}"
+    type: ed25519
+    state: present
+    force: no

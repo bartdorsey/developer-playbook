@@ -1,0 +1,32 @@
+- name: Start postgresql
+  become: yes
+  become_user: root
+  command: 
+    cmd: service postgresql start
+    warn: false
+- name: Set Postgres ENV files in ~/.{{ item }}
+  blockinfile:
+    create: yes
+    marker: "### {mark} SET POSTGRES ENVIRONMENT VARIABLES"
+    dest: "{{ item }}"
+    block: |
+      export PGHOST="localhost"
+      export PGUSER="postgres"
+  with_items:
+    - "~/.bashrc"
+    - "~/.zshrc"
+- name: Set postgres password
+  become: yes
+  become_method: sudo
+  become_user: postgres
+  command: psql -c "ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';"
+- name: create pgpass file
+  file:
+    path: ~/.pgpass
+    state: touch
+    mode: 0600
+- name: populate pgpass file
+  lineinfile:
+    path: ~/.pgpass
+    line: "localhost:5432:*:postgres:password"
+    state: present

@@ -1,0 +1,22 @@
+- name: clone nvm into ~/.nvm
+  git: 
+    repo: https://github.com/nvm-sh/nvm.git
+    dest: ~/.nvm 
+- name: Add NVM initialization to startup files
+  blockinfile:
+    marker: "### {mark} INTIALIZE NVM"
+    mode: 0644
+    path: "{{ item }}"
+    create: yes
+    block: |
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
+    state: present
+  with_items:
+    - "~/.bashrc"
+    - "~/.zshrc"
+- name: Install LTS Node and set it as default
+  command: bash -c '. ~/.nvm/nvm.sh; nvm install --lts; nvm alias default lts/\*'
+- name: install eslint globally
+  command: bash -c '. ~/.nvm/nvm.sh; npm install -g eslint'
