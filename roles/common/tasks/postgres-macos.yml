@@ -1,4 +1,4 @@
-- name: Install postgresql
+- name: Install postgresql using homebrew
   community.general.homebrew:
     update_homebrew: yes
     name: postgres
