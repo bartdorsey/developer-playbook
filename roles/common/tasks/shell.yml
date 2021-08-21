@@ -5,7 +5,9 @@
     shell: /bin/zsh
 - name: Install starship prompt
   become: yes
-  shell: sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
+  shell: 
+    cmd: sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
+    creates: /usr/local/bin/starship
 - name: Add starship to zshrc
   blockinfile:
     marker: "### {mark} Initialized Starship Prompt"
