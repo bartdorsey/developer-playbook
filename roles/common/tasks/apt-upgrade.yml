@@ -13,6 +13,5 @@
       - acl
       - git
       - python3-pip
-      - python-is-python3
       - zip
       - unzip
