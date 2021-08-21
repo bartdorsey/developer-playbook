@@ -1,3 +1,11 @@
+- name: APT install PostgreSQL
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name: 
+      - postgresql
+      - python3-psycopg2
 - name: Get Postgres Version
   become: yes
   become_user: postgres

@@ -12,7 +12,5 @@
       - zsh
       - acl
       - git
-      - postgresql
       - python3-pip
       - python-is-python3
-      - python3-psycopg2
