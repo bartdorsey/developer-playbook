@@ -1,4 +1,13 @@
-- name: APT install PostgreSQL
+- name: APT install PostgreSQL on Ubuntu 18
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name: 
+      - postgresql
+      - python-psycopg2
+  when: ansible_facts.distribution_major_version == '18'
+- name: APT install PostgreSQL on Ubuntu 20
   become: yes
   apt:
     update_cache: yes
@@ -6,31 +15,25 @@
     name: 
       - postgresql
       - python3-psycopg2
-      - python-psycopg2
-- name: Start postgresql
-  become: yes
-  become_user: root
-  ansible.builtin.service:
-    name: postgresql
-    state: started
+  when: ansible_facts.distribution_major_version == '20'
 - name: Get Postgres Version
   become: yes
   become_user: postgres
-  community.postgresql.postgresql_info:
-    filter: version
+  command:
+    cmd: bash -c "psql --version | awk '{ print $3 }' | awk -F . '{ print $1 }'"
   register: postgres_version
 - name: Allow trusted local connections
   become: yes
   become_user: postgres
   community.postgresql.postgresql_pg_hba:
-    dest: /etc/postgresql/{{postgres_version.version.major}}/main/pg_hba.conf
+    dest: /etc/postgresql/{{postgres_version.stdout}}/main/pg_hba.conf
     contype: local
     method: trust
 - name: Allow trusted host connections
   become: yes
   become_user: postgres
   community.postgresql.postgresql_pg_hba:
-    dest: /etc/postgresql/{{postgres_version.version.major}}/main/pg_hba.conf
+    dest: /etc/postgresql/{{postgres_version.stdout}}/main/pg_hba.conf
     contype: host
     method: trust
 - name: Start postgresql
