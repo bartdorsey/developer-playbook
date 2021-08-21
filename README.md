@@ -21,7 +21,7 @@ development using Node.JS
 6. Run the playbook from the directory
 
     ```shell
-    ansible-playbook -K main.yml
+    ansible-playbook -K playbook.yml
     ```
 
 7. Enter your password when prompted.
@@ -39,7 +39,7 @@ development using Node.JS
 4. Run the playbook from the directory
 
    ```shell
-   ansible-playbook -K main.yml
+   ansible-playbook -K playbook.yml
    ```
 
 5. Enter your password when prompted.
