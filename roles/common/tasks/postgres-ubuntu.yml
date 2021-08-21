@@ -7,6 +7,12 @@
       - postgresql
       - python3-psycopg2
       - python-psycopg2
+- name: Start postgresql
+  become: yes
+  become_user: root
+  ansible.builtin.service:
+    name: postgresql
+    state: started
 - name: Get Postgres Version
   become: yes
   become_user: postgres
