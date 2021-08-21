@@ -16,6 +16,14 @@
   with_items:
     - "~/.zshrc"
 - name: Install LTS Node and set it as default
-  command: bash -c '. ~/.nvm/nvm.sh; nvm install --lts; nvm alias default lts/\*'
+  command: 
+    cmd: bash -c '. ~/.nvm/nvm.sh; nvm install --lts; nvm alias default lts/\*'
+    creates: ~/.nvm/alias
+- name: Set Node Version Variable
+  command:
+    cmd: bash -c '. ~/.nvm/nvm.sh; node --version'
+  register: node_version
 - name: install eslint globally
-  command: bash -c '. ~/.nvm/nvm.sh; npm install -g eslint'
+  command: 
+    cmd: bash -c '. ~/.nvm/nvm.sh; npm install -g eslint'
+    creates: "~/.nvm/versions/node/{{node_version.stdout}}/bin/eslint"

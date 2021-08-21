@@ -1,6 +1,15 @@
 - name: Configure GIT username
-  command: git config --global user.name "{{git_user}}"
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{git_user}}"
 - name: Configure GIT email
-  command: git config --global user.email "{{git_email}}"
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{git_email}}"
 - name: Configure GIT Pull to use Rebase
-  command: git config --global pull.rebase true
+  community.general.git_config:
+    name: pull.rebase
+    scope: global
+    value: "true"
