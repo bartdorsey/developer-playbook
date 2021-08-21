@@ -24,5 +24,8 @@
 - name: Setup Postgres on macOS
   import_tasks: postgres-macos.yml
   when: ansible_distribution|lower == 'macosx'
+- name: Install Homebrew Apps
+  import_tasks: homebrew.yml
+  when: ansible_distribution|lower == 'macosx'
 - name: Install Heroku
   import_tasks: heroku.yml

@@ -1,0 +1,16 @@
+- name: Install various useful homebrew cask packages
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - insomnia
+    - visual-studio-code
+    - postico
+    - postbird
+- name: Install various useful homebrew packages
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - unzip
+    - zip
