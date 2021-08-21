@@ -1,9 +1,0 @@
-- name: Set local path for python
-  blockinfile:
-    marker: "### {mark} SET LOCAL PATH FOR PYTHON"
-    dest: ~/.{{ item }}
-    block: export PATH=$PATH:$HOME/.local/bin
-  with_items:
-    - zshrc
-- name: Install termdown
-  command: pip3 install termdown

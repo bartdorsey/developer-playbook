@@ -1,0 +1,5 @@
+- name: Install Heroku Command Line
+  become: yes
+  shell: 
+    cmd: sh -c "$(curl https://cli-assets.heroku.com/install.sh)"
+    creates: /usr/local/bin/heroku

@@ -1,31 +1,31 @@
+- name: Allow trusted local connections
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_pg_hba:
+    dest: /etc/postgresql/12/main/pg_hba.conf
+    contype: local
+    method: trust
+- name: Allow trusted host connections
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_pg_hba:
+    dest: /etc/postgresql/12/main/pg_hba.conf
+    contype: host
+    method: trust
 - name: Start postgresql
   become: yes
   become_user: root
-  command: 
-    cmd: service postgresql start
-    warn: false
-- name: Set Postgres ENV files in ~/.{{ item }}
-  blockinfile:
-    create: yes
-    marker: "### {mark} SET POSTGRES ENVIRONMENT VARIABLES"
-    dest: "{{ item }}"
-    block: |
-      export PGHOST="localhost"
-      export PGUSER="postgres"
-  with_items:
-    - "~/.zshrc"
-- name: Set postgres password
+  ansible.builtin.service:
+    name: postgresql
+    state: started
+- name: Create postgres user
   become: yes
-  become_method: sudo
   become_user: postgres
-  command: psql -c "ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';"
-- name: create pgpass file
-  file:
-    path: ~/.pgpass
-    state: touch
-    mode: 0600
-- name: populate pgpass file
-  lineinfile:
-    path: ~/.pgpass
-    line: "localhost:5432:*:postgres:password"
-    state: present
+  community.postgresql.postgresql_user:
+    name: "{{ the_user }}"
+    role_attr_flags: SUPERUSER
+- name: Create user's default database
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: "{{ the_user }}"

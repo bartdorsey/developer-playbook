@@ -55,8 +55,8 @@ This installs the following things:
 - nvm
 - Node.JS LTS
 - eslint
+- The heroku command line
 - Generates an ssh key, it will be in ~/.ssh/id_ed25519.pub
-- termdown (A pip module that gives you a countdown)
 - Sets VSCODE to be your default editor.
 - Configures git username, email and sets `git pull` to do a rebase
 - Sets up an `open` and `wsl` alias (WSL Only)

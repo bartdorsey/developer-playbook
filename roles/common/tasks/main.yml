@@ -12,8 +12,6 @@
   import_tasks: aliases-wsl.yml
   when: 
     - ansible_facts['env']['WSL_DISTRO_NAME'] is defined
-- name: Setup Python
-  import_tasks: python.yml
 - name: Setup SSH Key
   import_tasks: ssh-key.yml
 - name: Configure GIT
@@ -26,3 +24,5 @@
 - name: Setup Postgres on macOS
   import_tasks: postgres-macos.yml
   when: ansible_distribution|lower == 'macosx'
+- name: Install Heroku
+  import_tasks: heroku.yml
