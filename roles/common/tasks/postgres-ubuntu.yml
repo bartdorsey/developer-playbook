@@ -6,6 +6,7 @@
     name: 
       - postgresql
       - python3-psycopg2
+      - python-psycopg2
 - name: Get Postgres Version
   become: yes
   become_user: postgres
