@@ -21,11 +21,17 @@
 - name: Setup Postgres on Ubuntu
   import_tasks: postgres-ubuntu.yml
   when: ansible_facts.os_family|lower == 'debian'
+  tags:
+    - postgres
 - name: Setup Postgres on macOS
   import_tasks: postgres-macos.yml
   when: ansible_distribution|lower == 'macosx'
+  tags:
+    - postgres
 - name: Install Homebrew Apps
   import_tasks: homebrew.yml
+  tags: 
+    - homebrew
   when: ansible_distribution|lower == 'macosx'
 - name: Install Heroku
   import_tasks: heroku.yml
