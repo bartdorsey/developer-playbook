@@ -6,12 +6,20 @@
 - name: Install Dependencies
   import_tasks: apt-upgrade.yml
   when: ansible_facts.os_family|lower == 'debian'
+- name: Install Homebrew Apps
+  import_tasks: homebrew.yml
+  tags: 
+    - homebrew
+  when: ansible_distribution|lower == 'macosx'
 - name: Setup Shell
   import_tasks: shell.yml
 - name: Setup aliases for WSL
   import_tasks: aliases-wsl.yml
   when: 
     - ansible_facts['env']['WSL_DISTRO_NAME'] is defined
+- name: Setup aliases for macOS
+  import_tasks: aliases-macos.yml
+  when: ansible_distribution|lower == 'macosx'
 - name: Setup SSH Key
   import_tasks: ssh-key.yml
 - name: Configure GIT
@@ -28,10 +36,5 @@
   when: ansible_distribution|lower == 'macosx'
   tags:
     - postgres
-- name: Install Homebrew Apps
-  import_tasks: homebrew.yml
-  tags: 
-    - homebrew
-  when: ansible_distribution|lower == 'macosx'
 - name: Install Heroku
   import_tasks: heroku.yml

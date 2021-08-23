@@ -3,6 +3,4 @@
     marker: "### {mark} Common Useful Shell Aliases"
     dest: ~/.zshrc
     block: |
-      alias open='explorer.exe'
-      alias wsl='wsl.exe'
-      source /etc/grc.zsh
+      source /usr/local/etc/grc.zsh
