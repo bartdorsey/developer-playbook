@@ -21,5 +21,7 @@
     - unzip
     - zip
     - grc
+    - pgcli
+    - htop
   when: 
     - item not in brews.stdout_lines

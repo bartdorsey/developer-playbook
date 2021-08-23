@@ -16,3 +16,5 @@
       - zip
       - unzip
       - grc
+      - pgcli
+      - htop
