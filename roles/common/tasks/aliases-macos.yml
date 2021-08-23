@@ -1,4 +1,4 @@
-- name: Setup Common useful aliases for WSL
+- name: Setup Common useful aliases for macOS
   blockinfile:
     marker: "### {mark} Common Useful Shell Aliases"
     dest: ~/.zshrc
