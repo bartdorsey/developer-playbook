@@ -56,6 +56,7 @@ This installs the following things:
 - the [starship prompt](https://starship.rs)
 - nvm
 - Node.JS LTS
+- ngrok (installs in ~/.local/bin)
 - eslint
 - The heroku command line
 - Generates an ssh key, it will be in ~/.ssh/id_ed25519.pub
