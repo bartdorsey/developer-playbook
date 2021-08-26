@@ -1,6 +1,6 @@
 - name: Install ngrok for Linux
   unarchive:
-    src: "{{ lookup('vars', ansible_facts.os_family + '_' + ansible_facts.userspace_architecture) }}"
+    src: "{{ lookup('vars', ansible_facts.os_family + '_' + ansible_facts.architecture) }}"
     dest: ~/.local/bin
     remote_src: yes
   vars:
