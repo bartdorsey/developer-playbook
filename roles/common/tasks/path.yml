@@ -1,0 +1,6 @@
+- name: Add common directories to the PATH
+  blockinfile: 
+    marker: "### {mark} Add common directories to the PATH"
+    path: ~/.zshrc
+    block: |
+      export PATH=$HOME/.local/bin:$PATH

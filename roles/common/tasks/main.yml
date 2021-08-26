@@ -20,6 +20,8 @@
 - name: Setup aliases for macOS
   import_tasks: aliases-macos.yml
   when: ansible_distribution|lower == 'macosx'
+- name: Setup PATH
+  import_tasks: path.yml
 - name: Setup SSH Key
   import_tasks: ssh-key.yml
 - name: Configure GIT
@@ -38,3 +40,5 @@
     - postgres
 - name: Install Heroku
   import_tasks: heroku.yml
+- name: Install ngrok
+  import_tasks: ngrok.yml
