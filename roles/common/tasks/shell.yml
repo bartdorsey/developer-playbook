@@ -6,7 +6,7 @@
 - name: create .zshrc
   file:
     path: ~/.zshrc
-    status: touch
+    state: touch
 - name: Install starship prompt
   become: yes
   shell: 
