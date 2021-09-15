@@ -1,0 +1,9 @@
+---
+- name: Deploy EC2 Instance
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - variables.yml
+  roles:
+    - aws
+  connection: local

@@ -7,6 +7,9 @@
       - postgresql
       - python-psycopg2
   when: ansible_facts.distribution_major_version == '18'
+  register: apt_action
+  retries: 100
+  until: apt_action is success or ('Failed to lock apt for exclusive operation' not in apt_action.msg and '/var/lib/dpkg/lock' not in apt_action.msg)
 - name: APT install PostgreSQL on Ubuntu 20
   become: yes
   apt:
@@ -16,6 +19,9 @@
       - postgresql
       - python3-psycopg2
   when: ansible_facts.distribution_major_version == '20'
+  register: apt_action
+  retries: 100
+  until: apt_action is success or ('Failed to lock apt for exclusive operation' not in apt_action.msg and '/var/lib/dpkg/lock' not in apt_action.msg)
 - name: Start postgresql
   become: yes
   become_user: root

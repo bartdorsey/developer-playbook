@@ -2,7 +2,10 @@
   become: yes
   apt:
     update_cache: yes
-    upgrade: full
+    upgrade: dist
+  register: apt_action
+  retries: 100
+  until: apt_action is success or ('Failed to lock apt for exclusive operation' not in apt_action.msg and '/var/lib/dpkg/lock' not in apt_action.msg)
 - name: apt install dependencies
   become: yes
   apt:
@@ -18,3 +21,6 @@
       - grc
       - pgcli
       - htop
+  register: apt_action
+  retries: 100
+  until: apt_action is success or ('Failed to lock apt for exclusive operation' not in apt_action.msg and '/var/lib/dpkg/lock' not in apt_action.msg)
