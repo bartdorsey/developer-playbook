@@ -1,0 +1,33 @@
+- name: ec2 on aws
+  ec2:
+    key_name: "key"
+    instance_type: "t2.micro"
+    image: "ami-09e67e426f25ce0d7"
+    wait: yes
+    count: 1
+    vpc_subnet_id: "subnet-0eebd6dfd70efdab0"
+    instance_tags: 
+      Name: "{{ student_name }}"
+      cohort: "{{ cohort }}"
+    assign_public_ip: yes
+    region: "us-east-1"
+    state: present
+    volumes:
+      - device_name: /dev/sda1
+        volume_size: 30
+        delete_on_termination: true
+    group_id: "sg-00415e9a6d79b673e"
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+  register: ec2
+- name: Print instances
+  ansible.builtin.debug:
+    var: ec2
+- name: Wait for Instance to launch
+  delegate_to: "{{ instance.public_dns_name }}"
+  wait_for_connection:
+    delay: 60
+    timeout: 320
+  loop: "{{ ec2.instances }}"
+  loop_control:
+    loop_var: instance

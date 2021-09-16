@@ -16,33 +16,14 @@
         dest: "~/.ssh/ec2_key.pem"  
         mode: 0400
   when: ec2_key.changed
-- name: ec2 on aws
-  ec2:
-        key_name: "key"
-        instance_type: "t2.micro"
-        image: "ami-09e67e426f25ce0d7"
-        wait: yes
-        count: 1
-        vpc_subnet_id: "subnet-0eebd6dfd70efdab0"
-        instance_tags: 
-          Name: "{{ item }}"
-          cohort: '2109-LSU-RM-WEB-FT'
-        assign_public_ip: yes
-        region: "us-east-1"
-        state: present
-        group_id: "sg-00415e9a6d79b673e"
-        aws_access_key: "{{ access_key }}"
-        aws_secret_key: "{{ secret_key }}"
+- name: "Allocate Instances"
+  include_tasks: 
+    file: allocate-instance.yml
+    apply: 
+      vars:
+        - student_name: '{{ item }}'
+        - cohort: '2109-LSU-RM-WEB-FT'
   with_items: 
-    - student1
-    - student2
-    - student3
-  register: ec2
-- name: Wait for Instance to launch
-  wait_for:
-         host: "{{ item.public_ip }}"
-         port: 22
-         state: started
-  with_items: "{{ ec2.instances }}"
+    - Bart Dorsey
 - name: "Refresh Inventory"
   meta: refresh_inventory
