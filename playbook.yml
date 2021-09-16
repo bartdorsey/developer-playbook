@@ -2,8 +2,6 @@
 - name: install
   hosts: localhost
   gather_facts: yes
-  vars_files:
-    - variables.yml
   vars:
     the_user: "{{ ansible_user_id }}"
   connection: local
