@@ -7,3 +7,16 @@
   roles:
     - aws
   connection: local
+- name: install
+  hosts: students*
+  gather_facts: yes
+  remote_user: ubuntu
+  vars_files:
+    - variables.yml
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  roles:
+    - common
+  tasks:
+    - name: Distribution
+      debug: msg="{{ ansible_distribution }}"
