@@ -3,7 +3,7 @@
 get_username() {
   echo "Enter your git username"
   read GIT_USER
-  if [ -z GIT_USER ]; then
+  if [ GIT_USER -eq "" ]; then
      get_username
   fi
 }
@@ -11,7 +11,7 @@ get_username() {
 get_email() {
   echo "Enter your git email"
   read GIT_EMAIL
-  if [ -z GIT_EMAIL ]; then
+  if [ -z GIT_EMAIL -eq "" ]; then
      get_email
   fi
 }
