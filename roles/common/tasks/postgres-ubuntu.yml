@@ -34,9 +34,16 @@
   community.postgresql.postgresql_pg_hba:
     dest: /etc/postgresql/{{postgres_version.stdout}}/main/pg_hba.conf
     contype: local
-    address: all
     users: all
     method: trust
+- name: Allow trusted local connections for postgres user
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_pg_hba:
+    dest: /etc/postgresql/{{postgres_version.stdout}}/main/pg_hba.conf
+    contype: local
+    method: trust
+    users: postgres
 - name: Allow trusted host connections
   become: yes
   become_user: postgres
@@ -46,6 +53,24 @@
     method: trust
     users: all
     address: all
+- name: Allow trusted localhost ipV4 connections
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_pg_hba:
+    dest: /etc/postgresql/{{postgres_version.stdout}}/main/pg_hba.conf
+    contype: host
+    method: trust
+    users: all
+    address: '127.0.0.1/32'
+- name: Allow trusted localhost ipV6 connections
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_pg_hba:
+    dest: /etc/postgresql/{{postgres_version.stdout}}/main/pg_hba.conf
+    contype: host
+    method: trust
+    users: all
+    address: '::1/128'
 - name: Reload postgresql
   become: yes
   become_user: root
