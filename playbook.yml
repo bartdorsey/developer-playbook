@@ -2,14 +2,8 @@
 - name: install
   hosts: localhost
   gather_facts: yes
-  vars_files:
-    - variables.yml
   vars:
-    the_user: "{{ ansible_user_id }}"
+    wanted_node_version: "14"
   connection: local
   roles:
     - common
-  tasks:
-    - name: Distribution
-      debug: msg="{{ ansible_distribution }}"
-

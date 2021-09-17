@@ -82,14 +82,14 @@
   become_user: postgres
   become_method: sudo
   community.postgresql.postgresql_user:
-    name: "{{ the_user }}"
+    name: "{{ ansible_user_id }}"
     role_attr_flags: SUPERUSER
 - name: Create user's default database
   become: yes
   become_user: postgres
   community.postgresql.postgresql_db:
-    name: "{{ the_user }}"
+    name: "{{ ansible_user_id }}"
 - name: Check postgres
   community.postgresql.postgresql_ping:
-    login_user: "{{ the_user }}"
-    db: "{{ the_user }}"
+    login_user: "{{ ansible_user_id }}"
+    db: "{{ ansible_user_id }}"

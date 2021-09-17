@@ -24,8 +24,6 @@
   import_tasks: path.yml
 - name: Setup SSH Key
   import_tasks: ssh-key.yml
-- name: Configure GIT
-  import_tasks: git-config.yml  
 - name: Setup NodeJS
   import_tasks: node.yml
 - name: Setup Postgres on Ubuntu

@@ -1,7 +1,7 @@
 - name: change user shell to zsh
   become: yes
   user:
-    name: "{{ the_user }}"
+    name: "{{ ansible_user_id }}"
     shell: /bin/zsh
 - name: create .zshrc
   file:

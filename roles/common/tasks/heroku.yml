@@ -1,5 +1,4 @@
-- name: Install Heroku Command Line
-  become: yes
-  shell: 
-    cmd: sh -c "$(curl https://cli-assets.heroku.com/install.sh)"
-    creates: /usr/local/bin/heroku
+- name: install heroku globally
+  command: 
+    cmd: bash -c '. ~/.nvm/nvm.sh; nvm use --silent default; npm install -g heroku'
+    creates: "~/.nvm/versions/node/{{node_version.stdout}}/bin/heroku"
