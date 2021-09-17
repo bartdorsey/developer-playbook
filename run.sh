@@ -21,7 +21,7 @@ verify_input() {
   echo "Your Email is $GIT_EMAIL";
   echo "Is this correct (Y/N)";
   read CORRECT
-  if [ "$CORRECT" = "N" ]; then
+  if [ "$CORRECT" = "N" || "$CORRECT" = "n" ]; then
     get_username
     get_password
     verify_input
