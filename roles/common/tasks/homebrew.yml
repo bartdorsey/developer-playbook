@@ -13,6 +13,7 @@
     - postbird
   when: 
     - item not in brews.stdout_lines
+  ignore_errors: yes
 - name: Install various useful homebrew packages
   community.general.homebrew:
     name: "{{ item }}"
