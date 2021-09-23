@@ -11,6 +11,7 @@
     - visual-studio-code
     - postico
     - postbird
+    - font-fira-code-nerd-font
   when: 
     - item not in brews.stdout_lines
   ignore_errors: yes
