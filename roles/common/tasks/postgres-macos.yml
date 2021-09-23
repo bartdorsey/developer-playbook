@@ -6,5 +6,4 @@
 - name: Start postgresl
   command: /usr/local/bin/brew services start postgresql
 - name: Create user's default database
-  community.postgresql.postgresql_db:
-    name: "{{ ansible_user_id }}"
+  command: "createdb {{ ansible_user_id }}"
