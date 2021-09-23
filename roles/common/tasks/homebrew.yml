@@ -1,3 +1,6 @@
+- name: Install taps
+  community.general.homebrew_tap:
+    name: homebrew/cask-fonts
 - name: Determine installed brews
   command: 'brew list'
   register: brews
@@ -11,6 +14,7 @@
     - visual-studio-code
     - postico
     - postbird
+    - font-fira-code-nerd-font
   when: 
     - item not in brews.stdout_lines
   ignore_errors: yes
@@ -24,7 +28,6 @@
     - grc
     - pgcli
     - htop
-    - homebrew/cask-fonts/font-fira-code-nerd-font
   when: 
     - item not in brews.stdout_lines
 - name: Install code symlink for Visual Studio Code
