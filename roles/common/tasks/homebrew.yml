@@ -24,7 +24,7 @@
     - grc
     - pgcli
     - htop
-    - font-fira-code-nerd-font    
+    - homebrew/cask-fonts/font-fira-code-nerd-font
   when: 
     - item not in brews.stdout_lines
 - name: Install code symlink for Visual Studio Code
