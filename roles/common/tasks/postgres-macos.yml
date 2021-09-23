@@ -1,5 +1,5 @@
-- name: Install psycopg2 for macOS python3
-  command: /usr/bin/pip3 install psycopg2
+- name: Install psycopg for macOS python3
+  command: /usr/bin/pip3 install psycopg
 - name: Install postgresql using homebrew
   community.general.homebrew:
     update_homebrew: yes
