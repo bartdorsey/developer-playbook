@@ -1,3 +1,5 @@
+- name: Install psycopg2 for macOS python3
+  command: /usr/bin/pip3 install psycopg2-binary
 - name: Install postgresql using homebrew
   community.general.homebrew:
     update_homebrew: yes
@@ -6,4 +8,6 @@
 - name: Start postgresl
   command: /usr/local/bin/brew services start postgresql
 - name: Create user's default database
-  command: "createdb {{ ansible_user_id }}"
+  community.postgresql.postgresql_db:
+    login_user: "{{ ansible_user_id }}"
+    name: "{{ ansible_user_id }}"
