@@ -16,12 +16,16 @@
       - postgresql
       - python3-psycopg2
   when: ansible_facts.distribution_major_version == '20'
+# - name: Start postgresql
+#   become: yes
+#   become_user: root
+#   ansible.builtin.service:
+#     name: postgresql
+#     state: restarted
 - name: Start postgresql
   become: yes
   become_user: root
-  ansible.builtin.service:
-    name: postgresql
-    state: started
+  command: service postgresql restart
 - name: Get Postgres Version
   become: yes
   become_user: postgres
@@ -74,9 +78,13 @@
 - name: Reload postgresql
   become: yes
   become_user: root
-  ansible.builtin.service:
-    name: postgresql
-    state: reloaded
+  command: service postgresql reload    
+# - name: Reload postgresql
+#   become: yes
+#   become_user: root
+#   ansible.builtin.service:
+#     name: postgresql
+#     state: reloaded
 - name: Create postgres user
   become: yes
   become_user: postgres

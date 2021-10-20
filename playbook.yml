@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: yes
   vars:
-    wanted_node_version: "14"
+    wanted_node_version: "16"
   connection: local
   roles:
     - common
