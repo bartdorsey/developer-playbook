@@ -4,7 +4,7 @@
     name: postgres
     state: present
 - name: Start postgresl
-  command: /usr/local/bin/brew services start postgresql
+  command: brew services start postgresql
 - name: Check for default database
   command: "psql {{ ansible_user_id }} -c '\\q'"
   register: default_database
