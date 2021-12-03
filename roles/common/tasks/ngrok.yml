@@ -7,6 +7,7 @@
     Debian_x86_64: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
     Debian_arm64: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.tgz
     Debian_armv7l: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+    Debian_aarch64: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.tgz
     Darwin_x86_64: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-amd64.zip
     Darwin_arm64: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-darwin-arm64.zip
 
