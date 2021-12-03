@@ -2,8 +2,6 @@
 - name: install
   hosts: 127.0.0.1
   gather_facts: yes
-  vars_files:
-    - variables.yml
   connection: local
   tasks:
     - name: Print all available facts
