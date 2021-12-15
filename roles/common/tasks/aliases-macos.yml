@@ -3,4 +3,4 @@
     marker: "### {mark} Common Useful Shell Aliases"
     dest: ~/.zshrc
     block: |
-      source /usr/local/etc/grc.zsh
+      source $HOMEBREW_PREFIX/etc/grc.zsh
