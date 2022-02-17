@@ -30,9 +30,3 @@
     - htop
   when: 
     - item not in brews.stdout_lines
-- name: Install code symlink for Visual Studio Code
-  become: yes
-  file:
-    src: "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
-    dest: "/usr/local/bin/code"
-    state: link
