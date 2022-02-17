@@ -19,6 +19,7 @@
     block: |
       export EDITOR="code -w"
 - name: Make sure /usr/local/bin exists and is writeable on macOS by admin users
+  become: yes
   file:
     path: /usr/local/bin
     state: directory
