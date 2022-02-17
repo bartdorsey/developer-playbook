@@ -7,6 +7,15 @@
   file:
     path: ~/.zshrc
     state: touch
+- name: Make sure /usr/local/bin exists and is writeable on macOS by admin users
+  become: yes
+  file:
+    path: /usr/local/bin
+    state: directory
+    mode: 0775
+    owner: root
+    group: admin
+  when: ansible_distribution|lower == 'macosx'
 - name: Install starship prompt
   become: yes
   shell: 
@@ -18,15 +27,6 @@
     dest: ~/.zshrc
     block: |
       export EDITOR="code -w"
-- name: Make sure /usr/local/bin exists and is writeable on macOS by admin users
-  become: yes
-  file:
-    path: /usr/local/bin
-    state: directory
-    mode: 0775
-    owner: root
-    group: admin
-  when: ansible_distribution|lower == 'macosx'
 - name: Add starship to zshrc
   blockinfile:
     marker: "### {mark} Initialize Starship Prompt"
