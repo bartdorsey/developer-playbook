@@ -19,32 +19,38 @@ development using Node.JS
     ```
 
 4. Clone this repo down or download the zip file.
-5. Copy variables-example.yml to variables.yml and edit it to suit your needs
-6. Run the playbook from the directory
+5. Run the playbook from the directory
 
     ```shell
     ansible-playbook -K playbook.yml
     ```
 
-7. Enter your password when prompted.
+6. Enter your password when prompted.
 
 ## MacOS
 
 1. Install ansible
+
+    With Homebrew
+
+    ```shell
+    brew install ansible
+    ```
+
+    or with python3
 
     ```shell
     pip3 install ansible
     ```
 
 2. Clone this repo down or download the zip file
-3. Copy variables-example.yml to variables.yml and edit it to suit your needs
-4. Run the playbook from the directory
+3. Run the playbook from the directory
 
    ```shell
    ansible-playbook -K playbook.yml
    ```
 
-5. Enter your password when prompted.
+4. Enter your password when prompted.
 
 This installs the following things:
 
