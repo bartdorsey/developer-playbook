@@ -9,48 +9,36 @@ development using Node.JS
 
 1. Install WSL2.
 2. Install Ubuntu (20.04 LTS recommended)
-3. Install Ansible on Ubuntu
+3. Run the playbook
 
     ```shell
-    sudo apt update
-    sudo apt install software-properties-common
-    sudo add-apt-repository --yes --update ppa:ansible/ansible
-    sudo apt install ansible
+    curl https://raw.githubusercontent.com/bartdorsey/developer-playbook/main/wsl.sh | sh
     ```
-
-4. Clone this repo down or download the zip file.
-5. Run the playbook from the directory
-
-    ```shell
-    ansible-playbook -K playbook.yml
-    ```
-
-6. Enter your password when prompted.
 
 ## MacOS
 
-1. Install ansible
-
-    With Homebrew
-
-    ```shell
-    brew install ansible
-    ```
-
-    or with python3
+1. Install Homebrew
+2. Run the playbook
 
     ```shell
-    pip3 install ansible
+    curl https://raw.githubusercontent.com/bartdorsey/developer-playbook/main/macos.sh | sh
     ```
 
-2. Clone this repo down or download the zip file
-3. Run the playbook from the directory
+## Ubuntu
 
-   ```shell
-   ansible-playbook -K playbook.yml
-   ```
+1. Run the playbook
 
-4. Enter your password when prompted.
+    ```shell
+    curl https://raw.githubusercontent.com/bartdorsey/developer-playbook/main/ubuntu.sh | sh
+    ```
+
+## Cloud Ubuntu (any cloud ubuntu where you don't have to put in a password)
+
+1. Run the playbook
+
+    ```shell
+    curl https://raw.githubusercontent.com/bartdorsey/developer-playbook/main/cloud.sh | sh
+    ```
 
 This installs the following things:
 

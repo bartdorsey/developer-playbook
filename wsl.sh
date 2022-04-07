@@ -8,6 +8,6 @@ ansible-galaxy collection install community.postgresql community.general
 echo ""
 echo "Enter your sudo password again when prompted by BECOMES:"
 echo ""
-ansible-pull -K -U https://github.com/fullstackacademy/developer-playbook.git playbook.yml
+ansible-pull -K -U https://github.com/bartdorsey/developer-playbook.git playbook.yml
 echo ""
 echo "Ansible setup complete, please close your Ubuntu Terminal and open a new one."
