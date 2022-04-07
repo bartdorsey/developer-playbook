@@ -1,0 +1,97 @@
+---
+- name: "install plugin dependencies with apt"
+  apt:
+    name: "{{ asdf_apt_optional_dependencies }}"
+    install_recommends: no
+    cache_valid_time: "{{ apt_cache_valid_time }}"
+  retries: "{{ remote_package_retries }}"
+  register: apt_result
+  until: apt_result is succeeded
+  become: True
+  when: ansible_os_family == "Debian"
+
+- name: "install plugin dependencies with yum"
+  yum:
+    name: "{{ asdf_yum_optional_dependencies }}"
+  retries: "{{ remote_package_retries }}"
+  register: yum_result
+  until: yum_result is succeeded
+  become: True
+  when: ansible_os_family == "RedHat"
+
+- name: "install plugins"
+  command: "bash -lc 'asdf plugin-add {{ item.name }} {{ item.repository | default() }}'"
+  args:
+    creates: "{{ asdf_user_home }}/.asdf/plugins/{{ item.name }}"
+    chdir: "{{ asdf_user_home }}"
+  with_items: "{{ asdf_plugins }}"
+  when: asdf_plugins|length > 0
+  become: True
+  become_user: "{{ asdf_user }}"
+  ignore_errors: True
+
+- name: "nodejs specific tasks"
+  include_tasks: "plugins/nodejs.yml"
+  when: '"nodejs" in item["name"]'
+  with_items: "{{ asdf_plugins }}"
+
+- name: "erlang specific tasks"
+  include_tasks: "plugins/erlang.yml"
+  when: '"erlang" in item["name"]'
+  with_items: "{{ asdf_plugins }}"
+
+- name: "ruby specific tasks"
+  include_tasks: "plugins/ruby.yml"
+  when: '"ruby" in item["name"]'
+  with_items: "{{ asdf_plugins }}"
+
+- name: "php specific tasks"
+  include_tasks: "plugins/php.yml"
+  when: '"php" in item["name"]'
+  with_items: "{{ asdf_plugins }}"
+
+- name: "install apps"
+  command: "bash -lc 'asdf install {{ item.0.name }} {{ item.1 }}'"
+  args:
+    creates: "{{ asdf_user_home }}/.asdf/installs/{{ item.0.name }}/{{ item.1 }}"
+    chdir: "{{ asdf_user_home }}"
+  with_subelements:
+    - "{{ asdf_plugins }}"
+    - versions
+    - flags:
+      skip_missing: True
+  when: asdf_plugins|length > 0
+  become: True
+  become_user: "{{ asdf_user }}"
+
+- name: "uninstall apps"
+  command: "bash -lc 'asdf uninstall {{ item.0.name }} {{ item.1 }}'"
+  args:
+    removes: "{{ asdf_user_home }}/.asdf/installs/{{ item.0.name }}/{{ item.1 }}"
+    chdir: "{{ asdf_user_home }}"
+  with_subelements:
+    - "{{ asdf_plugins }}"
+    - delete_versions
+    - flags:
+      skip_missing: True
+  when: asdf_plugins|length > 0
+  become: True
+  become_user: "{{ asdf_user }}"
+
+- name: "set global app versions"
+  command: "bash -lc 'asdf global {{ item.name }} {{ item.global | default(item.versions | difference(item.delete_versions|default([])) | sort | first) }}'"
+  args:
+    chdir: "{{ asdf_user_home }}"
+  when: item.versions is defined
+  with_items: "{{ asdf_plugins }}"
+  become: True
+  become_user: "{{ asdf_user }}"
+
+- name: "set asdfrc"
+  template:
+    src: "asdfrc.j2"
+    dest: "{{ asdf_user_home }}/.asdfrc"
+    owner: "{{ asdf_user }}"
+    mode: 0644
+  become: True
+  become_user: "{{ asdf_user }}"

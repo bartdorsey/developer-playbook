@@ -1,0 +1,6 @@
+---
+# tasks file for heroku
+- name: install heroku globally
+  command: 
+    cmd: bash -c '. ~/.nvm/nvm.sh; nvm use --silent default; npm install -g heroku'
+    creates: "~/.nvm/versions/node/{{node_version.stdout}}/bin/heroku"

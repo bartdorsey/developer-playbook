@@ -1,0 +1,13 @@
+---
+# tasks file for ssh-key
+- name: Create ~/.ssh directory
+  file:
+    path: ~/.ssh
+    state: directory
+- name: Generate ssh-key in ~/.ssh/id_ed25519
+  openssh_keypair:
+    path: "~/.ssh/id_ed25519"
+    type: ed25519
+    state: present
+    force: no
+  ignore_errors: yes

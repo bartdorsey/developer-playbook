@@ -1,0 +1,12 @@
+---
+# tasks file for developer-software
+- name: Install Dependencies
+  import_tasks: apt-upgrade.yml
+  when: ansible_facts.os_family|lower == 'debian'
+- name: Install Homebrew Apps
+  import_tasks: homebrew.yml
+  tags: 
+    - homebrew
+  when: ansible_distribution|lower == 'macosx'
+- name: Install ngrok
+  import_tasks: ngrok.yml

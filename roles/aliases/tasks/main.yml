@@ -1,0 +1,12 @@
+---
+# tasks file for aliases
+- name: Setup aliases for WSL
+  import_tasks: aliases-wsl.yml
+  when: 
+    - ansible_facts['env']['WSL_DISTRO_NAME'] is defined
+- name: Setup aliases for macOS
+  import_tasks: aliases-macos.yml
+  when: ansible_distribution|lower == 'macosx'
+- name: Setup aliases for Ubuntu
+  import_tasks: aliases-ubuntu.yml
+  when: ansible_facts.os_family|lower == 'debian'

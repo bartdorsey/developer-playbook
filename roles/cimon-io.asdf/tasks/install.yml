@@ -1,0 +1,47 @@
+---
+- name: "get users HOME"
+  getent:
+    database: passwd
+    key: "{{ asdf_user }}"
+    split: ":"
+
+- name: "set asdf_user_home variable"
+  set_fact:
+    "asdf_user_home": "{{ getent_passwd[asdf_user][4] }}"
+
+- name: "install asdf global dependencies with apt"
+  apt:
+    name: "{{ asdf_apt_global_dependencies }}"
+    install_recommends: no
+    cache_valid_time: "{{ apt_cache_valid_time }}"
+  become: True
+  retries: "{{ remote_package_retries }}"
+  register: apt_deps_result
+  until: apt_deps_result is succeeded
+  when: ansible_os_family == "Debian"
+
+- name: "install asdf global dependencies with yum"
+  yum:
+    name: "{{ asdf_yum_global_dependencies }}"
+  become: True
+  retries: "{{ remote_package_retries }}"
+  register: yum_deps_result
+  until: yum_deps_result is succeeded
+  when: ansible_os_family == "RedHat"
+
+- name: "install asdf"
+  git:
+    repo: "https://github.com/asdf-vm/asdf.git"
+    dest: "{{ asdf_user_home }}/.asdf"
+    version: "{{ asdf_version }}"
+  become: True
+  become_user: "{{ asdf_user }}"
+
+- name: "source asdf script"
+  template:
+    src: "asdf.sh.j2"
+    dest: "/etc/profile.d/asdf.sh"
+    owner: "root"
+    group: "root"
+    mode: 0755
+  become: True
