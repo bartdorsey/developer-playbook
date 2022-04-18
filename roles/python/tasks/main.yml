@@ -1,0 +1,12 @@
+---
+# tasks file for pip
+- name: Install pipenv
+  pip: 
+    name: pipenv
+- name: Install termdown
+  pip: 
+    name: termdown
+- name: Install autopep8
+  pip:
+    name: autopep8
+  

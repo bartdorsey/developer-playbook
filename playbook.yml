@@ -5,6 +5,10 @@
   vars:
     asdf_user: "{{ ansible_user_id }}"
     wanted_node_version: "16"
+    pyenv_python3_version: "3.9.6"
+    pyenv_python_versions: 
+      - "{{ pyenv_python3_version }}"
+    pyenv_global: "{{ pyenv_python3_version }} system"
   connection: local
   tasks: 
     - name: Distribution
@@ -18,3 +22,5 @@
     - postgresql
     - heroku
     - misc-utils
+    - python
+
