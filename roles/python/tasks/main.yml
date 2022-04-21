@@ -1,12 +1,12 @@
 ---
 # tasks file for pip
-- name: Install pipenv
+- name: Install pip packages
   pip: 
-    name: pipenv
-- name: Install termdown
-  pip: 
-    name: termdown
-- name: Install autopep8
-  pip:
-    name: autopep8
-  
+    name: 
+     - pip
+     - pipenv
+     - poetry
+     - black
+     - django
+     - autopep8
+     - djlint

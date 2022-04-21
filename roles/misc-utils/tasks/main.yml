@@ -10,3 +10,5 @@
   when: ansible_distribution|lower == 'macosx'
 - name: Install ngrok
   import_tasks: ngrok.yml
+- name: Github CLI
+  import_tasks: gh.yml
