@@ -1,0 +1,26 @@
+---
+- name: install
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    wanted_node_version: "16"
+    pyenv_python3_version: "3.9.6"
+    pyenv_python_versions: 
+      - "{{ pyenv_python3_version }}"
+    pyenv_global: "{{ pyenv_python3_version }} system"
+  connection: local
+  tasks: 
+    - name: Distribution
+      debug: msg="{{ ansible_distribution }}"
+        
+  roles:
+    # - zsh
+    # - ssh-key
+    # - aliases
+    # - nodejs
+    # - postgresql
+    # - heroku
+    # - misc-utils
+    # - python
+    - scoop
+

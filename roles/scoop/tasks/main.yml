@@ -1,0 +1,5 @@
+---
+# tasks file for scoop
+- name: Install sysinternals
+  community.windows.win_scoop:
+    name: sysinternals
