@@ -1,21 +1,33 @@
-- name: APT install PostgreSQL on Ubuntu 18
+- name: Import the postgresql apt key
   become: yes
-  apt:
-    update_cache: yes
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
     state: present
-    name: 
-      - postgresql
-      - python-psycopg2
+- name: Add postgres APT repository on Ubuntu 18
+  become: yes
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt bionic-pgdg main
   when: ansible_facts.distribution_major_version == '18'
-- name: APT install PostgreSQL on Ubuntu 20
+- name: Add postgres APT repository on Ubuntu 20
+  become: yes
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt focal-pgdg main
+  when: ansible_facts.distribution_major_version == '20'
+- name: Add postgres APT repository on Ubuntu 20
+  become: yes
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main
+  when: ansible_facts.distribution_major_version == '22'  
+- name: APT install PostgreSQL on Ubuntu
   become: yes
   apt:
     update_cache: yes
     state: present
     name: 
-      - postgresql
+      - "postgresql-{{wanted_postgresql_version}}"
       - python3-psycopg2
-  when: ansible_facts.distribution_major_version == '20'
+      - libpq-dev
+  when: ansible_facts.os_family|lower == 'debian'
 # - name: Start postgresql
 #   become: yes
 #   become_user: root

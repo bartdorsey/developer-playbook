@@ -1,5 +1,10 @@
 ---
 # tasks file for zsh
+- name: Install zsh on ubuntu
+  become: yes
+  apt: 
+    name: zsh
+  when: ansible_facts.os_family|lower == 'debian'
 - name: change user shell to zsh
   become: yes
   user:

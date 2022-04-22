@@ -9,7 +9,6 @@
     update_cache: yes
     state: present
     name: 
-      - zsh
       - acl
       - git
       - python3-pip
