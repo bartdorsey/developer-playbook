@@ -12,3 +12,4 @@
   import_tasks: ngrok.yml
 - name: Github CLI
   import_tasks: gh.yml
+  when: ansible_facts.os_family|lower == 'debian'

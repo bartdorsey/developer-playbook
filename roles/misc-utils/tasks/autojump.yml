@@ -1,0 +1,13 @@
+- name: apt install autojump
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name: 
+      - autojump
+- name: Configure autojump
+  blockinfile:
+    marker: "### {mark} Configure autojump"
+    dest: ~/.zshrc
+    block: |
+      source /usr/share/autojump/autojump.sh

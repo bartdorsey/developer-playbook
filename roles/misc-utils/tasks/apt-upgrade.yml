@@ -11,15 +11,17 @@
     name: 
       - acl
       - git
-      - python3-pip
       - zip
       - unzip
-      - grc
       - pgcli
       - htop
       - curl
       - sl
       - ncdu
       - mc
-      - autojump
       - libpq-dev
+      - vim
+- name: Install autojump
+  import_tasks: autojump.yml
+- name: Install grc
+  import_tasks: grc.yml

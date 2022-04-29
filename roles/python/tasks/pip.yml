@@ -1,0 +1,11 @@
+- name: Install pip packages
+  pip: 
+    name: 
+     - pip
+     - pipenv
+     - poetry
+     - black
+     - django
+     - autopep8
+     - djlint
+     - termdown

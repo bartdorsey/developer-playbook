@@ -1,0 +1,13 @@
+- name: apt install generic colorizer
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name: 
+      - grc
+- name: Add generic colorizer to zshrc
+  blockinfile:
+    marker: "### {mark} Configure generic colorizer"
+    dest: ~/.zshrc
+    block: |
+      source /etc/grc.zsh

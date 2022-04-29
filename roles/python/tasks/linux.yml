@@ -1,0 +1,16 @@
+---
+# tasks file for pip
+- name: apt upgrade before python
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: full
+- name: apt install Python and dependencies
+  become: yes
+  apt:
+    update_cache: yes
+    state: present
+    name: 
+      - python3
+      - python3-pip
+      - python-is-python3

@@ -1,12 +1,12 @@
 ---
-# tasks file for pip
+# tasks file for Python
+- name: Install Python on Debian Linux flavors
+  import_tasks: linux.yml
+  when: ansible_facts.os_family|lower == 'debian'
+- name: Install Python using Homebrew
+  import_tasks: macos.yml
+  tags: 
+    - homebrew
+  when: ansible_distribution|lower == 'macosx'
 - name: Install pip packages
-  pip: 
-    name: 
-     - pip
-     - pipenv
-     - poetry
-     - black
-     - django
-     - autopep8
-     - djlint
+  import_tasks: pip.yml

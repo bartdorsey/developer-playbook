@@ -3,4 +3,4 @@
     marker: "### {mark} Common Useful Shell Aliases"
     dest: ~/.zshrc
     block: |
-      source /etc/grc.zsh
+      alias ll=ls -al

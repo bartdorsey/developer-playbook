@@ -1,0 +1,13 @@
+- name: Determine installed brews
+  command: 'brew list'
+  register: brews
+  changed_when: false
+- name: Install python from homebrew
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python
+  when: 
+    - item not in brews.stdout_lines
+  ignore_errors: yes
