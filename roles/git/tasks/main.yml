@@ -1,0 +1,21 @@
+---
+# tasks file for git
+- name: Ask for git name
+  pause:
+    prompt: Enter your git name
+  register: git_name
+- name: Ask for git email
+  pause:
+    prompt: Enter your git email
+  register: git_email  
+- name: Set git name globally
+  git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_name.user_input }}"
+- name: Set git email globally
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_email.user_input }}"
+  

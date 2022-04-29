@@ -2,6 +2,27 @@
 - name: install
   hosts: localhost
   gather_facts: yes
+  vars_prompt:
+    - name: setup_git
+      prompt: Do you want to configure git? (Y or N)
+      default: "Y"
+      private: no
+    - name: generate_ssh_key
+      prompt: Do you want to generate an ssh key (Y or N)
+      default: "Y"
+      private: no
+    - name: install_postgres
+      prompt: Do you want to install PostgreSQL? (Y or N)
+      default: "Y"
+      private: no
+    - name: install_node
+      prompt: Do you want to install Node.JS? (Y or N)
+      default: "Y"
+      private: no
+    - name: install_python
+      prompt: Do you want to install Python? (Y or N)
+      default: "Y"
+      private: no
   vars:
     asdf_user: "{{ ansible_user_id }}"
     wanted_postgresql_version: "14"
@@ -12,12 +33,18 @@
       debug: msg="{{ ansible_distribution }}"
         
   roles:
+    - role: git
+      when: setup_git == "Y"
     - zsh
-    - ssh-key
+    - role: ssh-key
+      when: generate_ssh_key == "Y" 
     - aliases
-    - nodejs
-    - postgresql
+    - role: nodejs
+      when: install_node == "Y"
+    - role: postgresql
+      when: install_postgres == "Y"
     - heroku
     - misc-utils
-    - python
+    - role: python
+      when: install_python == "Y"
 
