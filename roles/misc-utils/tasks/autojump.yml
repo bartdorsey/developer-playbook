@@ -3,11 +3,5 @@
   apt:
     update_cache: yes
     state: present
-    name: 
+    name:
       - autojump
-- name: Configure autojump
-  blockinfile:
-    marker: "### {mark} Configure autojump"
-    dest: ~/.zshrc
-    block: |
-      source /usr/share/autojump/autojump.sh

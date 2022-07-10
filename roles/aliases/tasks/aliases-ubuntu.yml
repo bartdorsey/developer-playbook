@@ -1,6 +1,0 @@
-- name: Setup Common useful aliases for Ubuntu
-  blockinfile:
-    marker: "### {mark} Common Useful Shell Aliases"
-    dest: ~/.zshrc
-    block: |
-      alias ll=ls -al

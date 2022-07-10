@@ -1,0 +1,32 @@
+---
+dotfiles_repo: "https://github.com/bartdorsey/dotfiles.git"
+dotfiles_repo_version: main
+dotfiles_repo_accept_hostkey: true
+dotfiles_repo_local_destination: "~/.dotfiles"
+
+dotfiles_home: "~"
+dotfiles_files:
+  - .zshenv
+  - .config/zsh/.zshrc
+  - .config/zsh/zsh-functions.sh
+  - .config/zsh/zsh-aliases.sh
+  - .config/zsh/zsh-env.sh
+  - .config/zsh/zsh-nvm.sh
+  - .config/zsh/zsh-plugins.sh
+  - .config/zsh/zsh-ssh.sh
+  - .config/nvim/init.vim
+  - .config/starship.toml
+  - .config/macchina/macchina.toml
+  - .config/macchina/themes/Lithium.toml
+  - .config/macchina/themes/Helium.toml
+  - .config/macchina/themes/Hydrogen.toml
+  - .config/macchina/themes/Beryllium.toml
+  - .config/git/ignore
+  - .config/git/config
+dotfiles_dirs:
+  - .config
+  - .config/zsh
+  - .config/nvim
+  - .config/macchina
+  - .config/macchina/themes
+  - .config/git

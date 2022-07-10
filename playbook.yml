@@ -27,24 +27,32 @@
     asdf_user: "{{ ansible_user_id }}"
     wanted_postgresql_version: "14"
     wanted_node_version: "16"
+    rustup_user: "{{ ansible_user_id }}"
+    rustup_cargo_crates:
+      - fd-find
+      - ripgrep
+      - exa
+      - bat
+      - macchina
+      - git-delta
   connection: local
-  tasks: 
+  tasks:
     - name: Distribution
       debug: msg="{{ ansible_distribution }}"
-        
+
   roles:
+    - role: zsh
+    - role: dotfiles
     - role: git
       when: setup_git == "Y"
-    - zsh
+    - role: misc-utils
     - role: ssh-key
-      when: generate_ssh_key == "Y" 
-    - aliases
+      when: generate_ssh_key == "Y"
     - role: nodejs
       when: install_node == "Y"
-    - role: postgresql
-      when: install_postgres == "Y"
-    - heroku
-    - misc-utils
+    - role: heroku
     - role: python
       when: install_python == "Y"
-
+    - role: postgresql
+      when: install_postgres == "Y"
+    - role: hurricanehrndz.rustup

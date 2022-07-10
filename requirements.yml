@@ -2,3 +2,5 @@
 collections:
   - name: community.general
   - name: community.postgresql
+roles:
+  - name: hurricanehrndz.rustup

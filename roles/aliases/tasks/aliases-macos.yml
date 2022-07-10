@@ -1,6 +1,0 @@
-- name: Setup Common useful aliases for macOS
-  blockinfile:
-    marker: "### {mark} Common Useful Shell Aliases"
-    dest: ~/.zshrc
-    block: |
-      source $HOMEBREW_PREFIX/etc/grc.zsh

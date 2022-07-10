@@ -1,26 +1,26 @@
 ---
 # tasks file for nodejs
 - name: clone nvm into ~/.nvm
-  git: 
+  git:
     repo: https://github.com/nvm-sh/nvm.git
-    dest: ~/.nvm 
-- name: Add NVM initialization to startup files
-  blockinfile:
-    marker: "### {mark} INTIALIZE NVM"
-    mode: 0644
-    path: "{{ item }}"
-    create: yes
-    block: |
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
-    state: present
-  with_items:
-    - "~/.zshrc"
+    dest: ~/.nvm
+# - name: Add NVM initialization to startup files
+#   blockinfile:
+#     marker: "### {mark} INTIALIZE NVM"
+#     mode: 0644
+#     path: "{{ item }}"
+#     create: yes
+#     block: |
+#       export NVM_DIR="$HOME/.nvm"
+#       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#       [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
+#     state: present
+#   with_items:
+#     - "~/.zshrc"
 - name: Install Node {{ wanted_node_version }}
-  command: 
+  command:
     cmd: bash -c '. ~/.nvm/nvm.sh; nvm install {{ wanted_node_version }};'
-    creates: 
+    creates:
       - ~/.nvm/versions/node/*{{ wanted_node_version }}*/bin/node
 - name: Set Node {{ wanted_node_version }} to be the default
   command:
@@ -37,12 +37,12 @@
     cmd: bash -c '. ~/.nvm/nvm.sh; nvm use --silent default; which npm'
   register: npm_path
 - name: Print Node version
-  debug: 
+  debug:
     msg: "{{ node_version.stdout }}"
 - name: Print Node version
-  debug: 
-    msg: "{{ npm_path.stdout }}"    
+  debug:
+    msg: "{{ npm_path.stdout }}"
 - name: install eslint globally
-  command: 
+  command:
     cmd: bash -c '. ~/.nvm/nvm.sh; nvm use --silent default; npm install -g eslint'
     creates: "~/.nvm/versions/node/{{node_version.stdout}}/bin/eslint"
