@@ -55,4 +55,4 @@
       when: install_python == "Y"
     - role: postgresql
       when: install_postgres == "Y"
-    - role: hurricanehrndz.rustup
+    - role: ansible-rustup
