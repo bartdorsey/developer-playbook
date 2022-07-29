@@ -8,19 +8,18 @@
   apt:
     update_cache: yes
     state: present
-    name: 
+    name:
       - acl
       - git
       - zip
       - unzip
-      - pgcli
       - htop
       - curl
       - sl
       - ncdu
       - mc
       - libpq-dev
-      - vim
+      - neovim
 - name: Install autojump
   import_tasks: autojump.yml
 - name: Install grc
