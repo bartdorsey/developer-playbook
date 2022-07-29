@@ -14,7 +14,14 @@ dotfiles_files:
   - .config/zsh/zsh-nvm.sh
   - .config/zsh/zsh-plugins.sh
   - .config/zsh/zsh-ssh.sh
-  - .config/nvim/init.vim
+  - .config/nvim/init.lua
+  - .config/nvim/after/plugin/barbar.lua
+  - .config/nvim/after/plugin/color.lua
+  - .config/nvim/lua/echo/autocmd.lua
+  - .config/nvim/lua/echo/init.lua
+  - .config/nvim/lua/echo/packer.lua
+  - .config/nvim/lua/echo/remap.lua
+  - .config/nvim/lua/echo/set.lua
   - .config/starship.toml
   - .config/macchina/macchina.toml
   - .config/macchina/themes/Lithium.toml
@@ -27,6 +34,9 @@ dotfiles_dirs:
   - .config
   - .config/zsh
   - .config/nvim
+  - .config/nvim/after
+  - .config/nvim/after/plugin
+  - .config/nvim/lua
   - .config/macchina
   - .config/macchina/themes
   - .config/git
