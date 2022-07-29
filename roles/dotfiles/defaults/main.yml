@@ -37,6 +37,7 @@ dotfiles_dirs:
   - .config/nvim/after
   - .config/nvim/after/plugin
   - .config/nvim/lua
+  - .config/nvim/lua/echo
   - .config/macchina
   - .config/macchina/themes
   - .config/git
