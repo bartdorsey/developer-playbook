@@ -20,6 +20,7 @@
       - mc
       - libpq-dev
       - neovim
+      - gnupg
 - name: Install autojump
   import_tasks: autojump.yml
 - name: Install grc
