@@ -43,17 +43,17 @@
 
   roles:
     - role: zsh
-    - role: dotfiles
     - role: git
       when: setup_git == "Y"
     - role: misc-utils
     - role: ssh-key
       when: generate_ssh_key == "Y"
+    - role: hurricanehrndz.rustup
     - role: nodejs
       when: install_node == "Y"
+    - role: dotfiles
     - role: heroku
     - role: python
       when: install_python == "Y"
     - role: postgresql
       when: install_postgres == "Y"
-    - role: hurricanehrndz.rustup
