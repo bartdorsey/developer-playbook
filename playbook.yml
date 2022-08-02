@@ -35,6 +35,7 @@
       - bat
       - macchina
       - git-delta
+      - fnm
   connection: local
   tasks:
     - name: Distribution
