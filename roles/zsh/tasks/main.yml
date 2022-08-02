@@ -10,6 +10,13 @@
   user:
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
+- name: Install zplug
+  git:
+    repo: "https://github.com/zplug/zplug"
+    dest: "~/.zplug"
+    version: "master"
+    accept_hostkey: true
+  become: false
 - name: Make sure /usr/local/bin exists and is writeable on macOS by admin users
   become: yes
   file:
